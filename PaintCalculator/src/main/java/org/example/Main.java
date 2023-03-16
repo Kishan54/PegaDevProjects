@@ -19,7 +19,7 @@ public class Main {
 
         float totalArea = getArea(totalLength, totalWidth);
         float totalCost = getTotalCost(totalArea, litrePerMetreSquared, pricePerLitre);
-        
+
         System.out.println("£" + Math.round(totalCost));
     }
 
