@@ -18,14 +18,18 @@ public class Main {
         float totalWidth = 3.50f;
 
         float totalArea = getArea(totalLength, totalWidth);
-
-
-        float totalCost = (totalArea * litrePerMetreSquared)*pricePerLitre;
+        float totalCost = getTotalCost(totalArea, litrePerMetreSquared, pricePerLitre);
+        
         System.out.println("£" + Math.round(totalCost));
     }
 
     public static float getArea (float length, float width){
 
         return (length*width);
+    }
+
+    public static float getTotalCost (float area, float litrePerMetreSquared, float pricePerLitre){
+
+        return ((area * litrePerMetreSquared)*pricePerLitre);
     }
 }
