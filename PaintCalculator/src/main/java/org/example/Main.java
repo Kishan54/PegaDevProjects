@@ -8,7 +8,9 @@ public class Main {
         Scanner myObj = new Scanner(System.in);
 
         String[] paintCategories = {"Basic", "Pastel", "Vibrant"};
+        float[] paintCategoryMultiplier = {1, 1.25f, 1.5f};
         String[] paintTypes = {"Gloss", "Matte", "Satin"};
+
         String[] paintColours = {"White", "Black", "Red", "Blue", "Green", "Yellow", "Purple", "Pink", "Brown"};
 
         int userInput;
@@ -45,18 +47,29 @@ public class Main {
                 System.out.println("Enter total Width:");
                 float totalWidth = myObj.nextFloat(); //3.50f;
 
-                System.out.println("Category Options: \n1 - Basic \n2 - Pastel \n3 - Vibrant \nChoose your option (1-3):");
-                int colourCategoryOfPaint = myObj.nextInt();
+                System.out.println("Paint Category Options: \n1 - Basic \n2 - Pastel \n3 - Vibrant \nChoose your option (1-3):");
+                int categoryOfPaint = myObj.nextInt();
 
-                System.out.println("Type Options: \n1 - Gloss \n2 - Matte \n3 - Satin \nChoose your option (1-3):");
+                System.out.println("Paint Type Options: \n1 - Gloss \n2 - Matte \n3 - Satin \nChoose your option (1-3):");
                 int typeOfPaint = myObj.nextInt();
+
+                System.out.println("Paint colour Options: ");
+                for (int i=0; i < paintColours.length; i++) {
+                    System.out.println((i+1) + " - " + paintColours[i]);
+                }
+
+                System.out.println("Choose your option (1-9): ");
+                int paintColour = myObj.nextInt();
 
                 float totalArea = getArea(totalLength, totalWidth);
                 float totalLitres = getTotalLitres(totalArea);
 
-                float pricePerLitre = getPrice(colourCategoryOfPaint, typeOfPaint);
+                float pricePerLitre = getPrice(categoryOfPaint, typeOfPaint, paintCategoryMultiplier);
                 double totalCost = getTotalCost(totalLitres, pricePerLitre);
 
+                System.out.println("Your chosen colour of paint is " + paintColours[paintColour-1]);
+                System.out.println("Your chosen category of paint is " + paintCategories[categoryOfPaint-1]);
+                System.out.println("Your chosen type of paint is " + paintTypes[typeOfPaint-1]);
                 System.out.println("The total price is: £" + (Math.round(totalCost * 100.0) / 100.0));
             } else if (userInput == 5) {
                 quitConfirmed = true;
@@ -76,9 +89,7 @@ public class Main {
         return amount;
     }
 
-    public static float getPrice (int colourCat, int type){
-
-
+    public static float getPrice (int cat, int type, float[] paintCategoryMultiplier){
         float price;
         switch (type) {
             case (1):
@@ -94,12 +105,8 @@ public class Main {
                 price = 3.00f;
         }
 
-        if (colourCat == 1) {
-            price *= 1;
-        } else if (colourCat == 2) {
-            price *= 1.25;
-        } else if (colourCat == 3){
-            price *= 1.35;
+        if (cat >= 1 && cat <= 3 ) {
+            price *= paintCategoryMultiplier[cat-1];
         } else {
             price *= 1;
         }
