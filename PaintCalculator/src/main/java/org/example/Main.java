@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         // cost of paint x how much is needed
@@ -15,18 +17,40 @@ public class Main {
         // use if else
         // use switch
         // different types of paint
+        Scanner myObj = new Scanner(System.in);
 
-        float totalLength = 15.45f;
-        float totalWidth = 3.50f;
+        boolean valid = false;
 
-        String colourCategoryOfPaint = "Pastel"; // Basic, Pastel, Vibrant
-        String typeOfPaint = "Gloss"; // Gloss, Matte, Satin
+
+            System.out.println("Enter Length:");
+            float totalLength = myObj.nextFloat(); //15.45f;
+
+            System.out.println("Enter Width:");
+            float totalWidth = myObj.nextFloat(); //3.50f;
+
+            System.out.println("Enter Category (Basic, Pastel, Vibrant):");
+            String colourCategoryOfPaint = myObj.next(); //"Pastel"; // Basic, Pastel, Vibrant
+
+            System.out.println("Enter Type of Paint (Gloss, Matte, Satin):");
+            String typeOfPaint = myObj.next(); //"Matte"; // Gloss, Matte, Satin
+
+            if (totalLength > 0 && totalWidth > 0 && colourCategoryOfPaint != "" && typeOfPaint != "") {
+                valid = true;
+            }
+
+
+
 
         float totalArea = getArea(totalLength, totalWidth);
         float totalLitres = getTotalLitres(totalArea);
+
+
+
         float pricePerLitre = getPrice(colourCategoryOfPaint, typeOfPaint);
         double totalCost = getTotalCost(totalLitres, pricePerLitre);
-        System.out.println("£" + (Math.round(totalCost * 100.0) / 100.0));
+
+
+        System.out.println("The total price is: £" + (Math.round(totalCost * 100.0) / 100.0));
     }
 
     public static float getTotalLitres (float area){
@@ -40,25 +64,43 @@ public class Main {
     }
 
     public static float getPrice (String colourCat, String type){
-        //type of paint
-        float price = 0.00f;
-        switch (colourCat) {
-            case "Gloss":
+
+        colourCat = colourCat.toLowerCase();
+        type = type.toLowerCase();
+
+        float price;
+        switch (type) {
+            case ("gloss"):
+                System.out.println("Gloss Chosen");
                 price = 3.99f;
-            case "Matte":
+                break;
+            case ("matte"):
+                System.out.println("Matte Chosen");
                 price = 4.49f;
-            case "Satin":
+                break;
+            case ("satin"):
+                System.out.println("Satin Chosen");
                 price = 4.74f;
+                break;
             default:
-                price = 0.00f;
+                System.out.println("None Chosen");
+                price = 3.00f;
         }
-        //colour category
-        if (type == "Basic") {
+
+        System.out.println(colourCat);
+
+        if (colourCat == "basic") {
+            System.out.println("Basic Chosen");
             price *= 1;
-        } else if (type == "Pastel") {
+        } else if (colourCat == "pastel") {
+            System.out.println("Pastel Chosen");
             price *= 1.25;
-        } else {
+        } else if (colourCat == "vibrant"){
+            System.out.println("Vibrant Chosen");
             price *= 1.35;
+        } else {
+            System.out.println("None Chosen");
+            price *= 1;
         }
         return (price);
     }
