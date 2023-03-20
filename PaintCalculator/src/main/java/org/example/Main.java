@@ -81,6 +81,7 @@ public class Main {
     }
 
     public static float getArea (float length, float width){
+
         return (length*width);
     }
     public static float getTotalLitres (float area){
@@ -114,6 +115,7 @@ public class Main {
     }
 
     public static float getTotalCost (float totalLitres, float price){
+
         return price*totalLitres;
     }
 }
